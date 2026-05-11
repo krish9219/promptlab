@@ -21,6 +21,10 @@ rubric:
   - criterion: Output includes correct final answer
     weight: 3
     description: Correct answer is $345.00 (Mon=$275, Tue=$70+$200=$270, wait recompute... let the grader verify).
+hints:
+  - "Tell the model to 'think step by step' BEFORE producing the answer."
+  - "Number the steps the model should walk through (identify inputs, plan, compute, verify, answer)."
+  - "Put the final answer on its own line with a fixed prefix like 'ANSWER:' so downstream code can parse it."
 ---
 
 Chain-of-thought (CoT) prompting is the cheap trick that works. On reasoning, math, and multi-step problems, asking the model to "think step by step" before answering can lift accuracy by 10–30 percentage points.

@@ -20,6 +20,10 @@ rubric:
   - criterion: Refined outline is genuinely better
     weight: 2
     description: The final outline should be tighter and more specific than the draft would have been.
+hints:
+  - "Make the stages explicit: Stage 1 = draft (rough), Stage 2 = critique (specific weaknesses), Stage 3 = revise."
+  - "Give the critique stage explicit criteria: heading specificity, argument arc, redundancy."
+  - "Tell the prompt to output ONLY the refined outline at the end — drop the draft and critique."
 ---
 
 A single prompt can do one thing well. A *chain* of prompts can do hard things well, by letting the model see its own work and improve on it.

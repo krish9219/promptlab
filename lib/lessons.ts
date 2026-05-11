@@ -39,6 +39,7 @@ export interface LessonMeta {
     studentSystem?: string;
   };
   rubric: RubricItem[];
+  hints: string[];
 }
 
 export interface Lesson extends LessonMeta {
@@ -88,6 +89,7 @@ function parseLesson(filePath: string): Lesson {
       weight: Number(r.weight),
       description: String(r.description),
     })),
+    hints: Array.isArray(data.hints) ? data.hints.map(String) : [],
     body: content,
   };
 }

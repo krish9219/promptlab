@@ -2,28 +2,271 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  background: #0a0a0a;
-  color: #f5f5f5;
-  margin: 0;
-  height: 100%;
-}
-* { -webkit-font-smoothing: antialiased; }
+/* ============================================== Theme tokens */
 
-/* Lesson markdown body */
-.prose h1 { @apply text-3xl font-bold mt-8 mb-3 tracking-tight; }
-.prose h2 { @apply text-xl font-semibold mt-7 mb-2 tracking-tight; }
-.prose h3 { @apply text-lg font-semibold mt-5 mb-2; }
-.prose p { @apply my-3 text-zinc-300 leading-relaxed; }
-.prose ul { @apply my-3 ml-6 list-disc text-zinc-300; }
-.prose ol { @apply my-3 ml-6 list-decimal text-zinc-300; }
-.prose li { @apply my-1; }
-.prose code { @apply bg-panel2 border border-line rounded px-1.5 py-0.5 text-sm font-mono text-amber-200; }
-.prose pre { @apply bg-panel2 border border-line rounded-lg p-4 my-4 overflow-x-auto; }
-.prose pre code { @apply bg-transparent border-0 p-0 text-zinc-200; }
-.prose strong { @apply text-white font-semibold; }
-.prose a { @apply text-accent underline; }
-.prose blockquote { @apply border-l-2 border-accent pl-4 my-4 italic text-zinc-400; }
-.prose table { @apply my-4 w-full text-sm; }
-.prose th, .prose td { @apply border border-line px-3 py-2; }
-.prose th { @apply bg-panel2 text-left font-semibold; }
+:root {
+  --bg: #0a0a0a;
+  --bg-elev: #0f0f0f;
+  --panel: #141414;
+  --panel-2: #1a1a1a;
+  --line: #232323;
+  --line-2: #2a2a2a;
+  --text: #ededed;
+  --text-2: #c4c4c4;
+  --mute: #6b6b6b;
+
+  --accent: #8b5cf6;
+  --accent-2: #6d28d9;
+  --good: #34d399;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+
+  --grad-1: linear-gradient(135deg, #8b5cf6, #6366f1 50%, #06b6d4);
+  --grad-2: linear-gradient(135deg, #f59e0b, #ef4444);
+  --grad-3: linear-gradient(135deg, #34d399, #06b6d4);
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  height: 100%;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: rgba(139, 92, 246, 0.4); color: white; }
+
+/* Smooth focus rings */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scrollbar */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 5px; }
+*::-webkit-scrollbar-thumb:hover { background: #383838; }
+
+/* ============================================== Lesson markdown */
+
+.prose {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+.prose h1 {
+  @apply text-3xl font-bold tracking-tight;
+  color: var(--text);
+  margin: 2rem 0 0.75rem;
+}
+.prose h2 {
+  @apply text-xl font-semibold tracking-tight;
+  color: var(--text);
+  margin: 2rem 0 0.5rem;
+  padding-top: 0.5rem;
+}
+.prose h3 {
+  @apply text-base font-semibold;
+  color: var(--text);
+  margin: 1.25rem 0 0.4rem;
+}
+.prose p { margin: 0.85rem 0; }
+.prose ul, .prose ol { margin: 0.85rem 0; padding-left: 1.5rem; }
+.prose li { margin: 0.35rem 0; }
+.prose li::marker { color: var(--accent); }
+.prose code {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  color: #fcd34d;
+}
+.prose pre {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.prose pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--text);
+  font-size: inherit;
+}
+.prose strong { color: var(--text); font-weight: 600; }
+.prose em { color: var(--text); }
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.prose a:hover { color: #a78bfa; }
+.prose blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--mute);
+  font-style: italic;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 14px;
+}
+.prose th, .prose td {
+  border: 1px solid var(--line);
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+}
+.prose th {
+  background: var(--panel-2);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
+}
+
+/* ============================================== Animations */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes scoreCount {
+  from { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.1); }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--panel-2) 0%,
+    var(--line-2) 50%,
+    var(--panel-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.animate-fade-in { animation: fadeIn 0.4s ease-out both; }
+.animate-score { animation: scoreCount 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-pulse-soft { animation: pulse 1.8s ease-in-out infinite; }
+
+/* ============================================== Utilities */
+
+.grad-text {
+  background: var(--grad-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow {
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.3),
+    0 8px 32px rgba(139, 92, 246, 0.18);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.card:hover { border-color: var(--line-2); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.15s, transform 0.15s, border-color 0.15s;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--mute); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.btn-grad {
+  background: var(--grad-1);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  border-color: transparent;
+  color: white;
+  transition: background-position 0.4s ease;
+}
+.btn-grad:hover { background-position: 100% 100%; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.chip-beginner { color: #34d399; border-color: rgba(52, 211, 153, 0.3); background: rgba(52, 211, 153, 0.08); }
+.chip-intermediate { color: #22d3ee; border-color: rgba(34, 211, 238, 0.3); background: rgba(34, 211, 238, 0.08); }
+.chip-advanced { color: #a855f7; border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.08); }
+.chip-expert { color: #ef4444; border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.08); }
+
+/* ============================================== Mobile */
+
+@media (max-width: 760px) {
+  .prose { font-size: 15px; }
+  .prose h1 { font-size: 1.625rem; }
+  .prose h2 { font-size: 1.25rem; }
+}

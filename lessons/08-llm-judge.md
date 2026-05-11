@@ -31,6 +31,11 @@ rubric:
   - criterion: Penalises empty-platitude support replies
     weight: 2
     description: The test response is full of platitudes and resolves nothing. A good judge gives low accuracy.
+hints:
+  - "Give each criterion concrete observable signals — what would a 1 look like vs a 5?"
+  - "Include explicit anti-length-bias instruction: 'Do not reward longer answers just for being longer.'"
+  - "Demand strict JSON-only output with no markdown fences."
+  - "Weight accuracy higher than tone or brevity — that's what customers actually care about."
 ---
 
 LLM-as-judge is the cheapest way to scale evaluation. You write a prompt that grades other prompts' outputs, and you can grade thousands of responses per dollar.

@@ -23,6 +23,11 @@ rubric:
   - criterion: Output is exactly an ISO date for the test input
     weight: 3
     description: The actual output for "next Tuesday afternoon" should be 2026-05-19 (next Tuesday after 2026-05-12).
+hints:
+  - "Establish today's date explicitly so relative phrases like 'next Tuesday' have an anchor."
+  - "Use a consistent Input:/Output: structure for every example AND for the final query."
+  - "Pick examples that cover different patterns: relative phrase, named month, day-of-week."
+  - "End your prompt with 'Output:' and nothing else, so the model continues from there."
 ---
 
 Few-shot learning is the single highest-leverage prompting technique. On classification, extraction, and format-shaping tasks, adding 2–5 examples typically beats every other technique combined.

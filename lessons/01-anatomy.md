@@ -21,6 +21,10 @@ rubric:
   - criterion: Output stays focused on summary
     weight: 3
     description: The actual produced summary should be two sentences and capture the main idea.
+hints:
+  - "Lead with the task in imperative voice. 'Summarize the following...' beats 'You are an expert summarizer who...'"
+  - "Use the exact phrase 'exactly two sentences' so the model has nothing to interpret."
+  - "Put {{input}} on a new line, clearly separated from the instruction."
 ---
 
 A prompt has three jobs. It tells the model **what role to take**, **what task to do**, and **what shape the output should have**. Everything else is decoration.

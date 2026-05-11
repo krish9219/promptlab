@@ -24,6 +24,11 @@ rubric:
   - criterion: Output is parseable JSON matching schema
     weight: 3
     description: Output must parse as JSON and have the three required keys, all as arrays.
+hints:
+  - "Show the exact schema with key names and types right in the prompt."
+  - "Forbid markdown fences explicitly. 'No backticks. No prose. JSON only.'"
+  - "Include one tiny worked example so the model sees the shape."
+  - "Specify the empty-array fallback so the model doesn't return null for missing categories."
 ---
 
 The single most-requested production capability from LLMs is **structured output**. Most failures here are prompt-side, not model-side.

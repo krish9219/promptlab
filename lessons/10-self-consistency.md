@@ -21,6 +21,11 @@ rubric:
   - criterion: Correct final answer
     weight: 2
     description: Correct answer is Cory at 25% (50% of coding which is 50% of project = 0.5*0.5 = 25%).
+hints:
+  - "Explicitly ask for 3+ separate reasoning attempts, each from a different angle."
+  - "Tell the model how to aggregate: 'majority answer wins' or 'pick the most rigorous chain'."
+  - "Demand the alternatives be shown so you can audit the reasoning."
+  - "Sample the work: each attempt should multiply contribution-share by category-weight."
 ---
 
 Self-consistency is the technique that turns "the model got it right 60% of the time" into "the model gets it right 80% of the time" at the cost of N× tokens.

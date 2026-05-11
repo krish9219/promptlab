@@ -25,6 +25,10 @@ rubric:
   - criterion: Output actually catches the SQL injection
     weight: 3
     description: The test input has a clear SQL injection vulnerability. Good critiques catch it.
+hints:
+  - "Skip vague boasts ('world-class', 'Nobel-tier'). Use a concrete job title that implies the right concerns."
+  - "Tell the model to focus on the SINGLE most important issue, not all issues. Constraint forces depth."
+  - "Specify the format ('3-5 sentences') and demand a concrete fix, not just a description of the problem."
 ---
 
 Roles work. They just don't work the way prompt-Twitter says they do.

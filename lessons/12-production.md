@@ -38,6 +38,12 @@ rubric:
   - criterion: Output is parseable + correct
     weight: 3
     description: Output should parse as JSON with vendor=Acme Cloud Services, total=3950, due_date=2026-04-15 (or 2024/2025 depending on context), line_items including the credit.
+hints:
+  - "Add a version comment at the top so production rollouts are traceable."
+  - "Include a confidence field so the model can signal uncertainty instead of fabricating."
+  - "Provide a worked example showing exactly the schema you want — examples beat schema prose."
+  - "Specify fallback values for missing fields. null is better than invented 'unknown'."
+  - "Note that 'total' is NET (after credits/discounts), not gross."
 ---
 
 The prompt that works in your prototype is rarely the prompt that survives production. Production prompts have nine concerns the prototype doesn't.

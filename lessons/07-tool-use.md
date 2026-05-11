@@ -28,6 +28,11 @@ rubric:
   - criterion: Output actually invokes both tools sensibly
     weight: 2
     description: For the test question, the output should call search (for the distance) and calculator (for the division).
+hints:
+  - "Describe each tool with a clear type signature. 'search(query: string) -> string'."
+  - "Add explicit when-to-use rules: 'Use search for any factual lookup. Use calculator for any arithmetic.'"
+  - "Forbid invented facts: 'If you don't know with certainty, search. Do not rely on prior knowledge.'"
+  - "Specify a max number of tool calls so the agent doesn't loop forever."
 ---
 
 An agent is an LLM in a loop with tools. The loop runs:

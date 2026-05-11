@@ -25,6 +25,10 @@ rubric:
   - criterion: Output items are actually specific
     weight: 3
     description: The actual produced items should be concrete enough to act on this week.
+hints:
+  - "Add a sentence that bans vague verbs like 'consider', 'improve', 'enhance'. Require concrete action verbs."
+  - "Specify the exact count ('exactly 3 items') and the exact format ('numbered list, no preamble')."
+  - "Constrain action specificity: 'Each item must be something the speaker could do this week.'"
 ---
 
 The single biggest mistake new prompters make is being *too polite*. Real instructions, the kind a senior engineer gives a junior, are direct and constraining.

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getMetaList, LEVEL_NAMES, type LessonMeta } from "@/lib/lessons";
+import { ProgressChart } from "@/components/ProgressChart";
+import { LessonIcon } from "@/components/LessonIcon";
 
 export default function Home() {
   const lessons = getMetaList();
@@ -8,57 +10,100 @@ export default function Home() {
     if (!byLevel.has(l.level)) byLevel.set(l.level, []);
     byLevel.get(l.level)!.push(l);
   }
-  const total = lessons.reduce((s, l) => s + l.estimatedMinutes, 0);
+  const totalMin = lessons.reduce((s, l) => s + l.estimatedMinutes, 0);
+  const firstLessonId = lessons[0]?.id;
 
   return (
-    <main className="h-screen overflow-auto px-6 py-12 sm:px-12">
-      <div className="mx-auto max-w-3xl">
-        <header className="mb-10">
-          <h1 className="text-5xl font-extrabold tracking-tight">
-            prompt<span className="text-accent">lab</span>
+    <main className="h-screen overflow-auto">
+      <div className="mx-auto max-w-4xl px-5 py-10 sm:px-8 sm:py-16">
+        <section className="relative">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--panel-2)] px-3 py-1 text-xs text-[color:var(--mute)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--good)] animate-pulse-soft" />
+            <span>Live LLM grading · 12 lessons · ~{totalMin} min</span>
+          </div>
+          <h1 className="mt-4 text-5xl font-extrabold tracking-tight sm:text-6xl">
+            Learn prompt engineering by <span className="grad-text">getting graded</span>.
           </h1>
-          <p className="mt-3 text-lg text-zinc-400">
-            Learn prompt engineering by doing. Every lesson ends with an assignment that an LLM grades live.
+          <p className="mt-4 max-w-2xl text-lg text-[color:var(--text-2)]">
+            promptlab teaches prompt engineering the way you actually learn — write a prompt,
+            an LLM runs it, a second LLM scores it against a rubric and tells you what to fix.
+            Beginner to expert in under three hours.
           </p>
-          <p className="mt-2 text-sm text-muted">
-            {lessons.length} lessons · ~{total} minutes total
-          </p>
-        </header>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            {firstLessonId && (
+              <Link href={`/lesson/${firstLessonId}`} className="btn btn-grad px-5 py-2.5 text-sm">
+                Start with lesson 1 &rarr;
+              </Link>
+            )}
+            <a href="https://github.com/krish9219/promptlab" className="btn px-5 py-2.5 text-sm">
+              View on GitHub
+            </a>
+          </div>
+        </section>
 
-        {[1, 2, 3, 4].map((lvl) => {
-          const items = byLevel.get(lvl) ?? [];
-          if (!items.length) return null;
-          const color = ["text-beginner", "text-intermediate", "text-advanced", "text-expert"][lvl - 1];
-          return (
-            <section key={lvl} className="mb-8">
-              <h2 className={`mb-3 text-xs uppercase tracking-widest ${color}`}>{LEVEL_NAMES[lvl]}</h2>
-              <div className="space-y-2">
-                {items.map((l) => (
-                  <Link
-                    key={l.id}
-                    href={`/lesson/${l.id}`}
-                    className="flex items-center justify-between rounded-lg border border-line bg-panel px-4 py-3 transition hover:border-accent"
-                  >
-                    <div>
-                      <div className="font-medium">{l.title}</div>
-                      <div className="text-xs text-muted">~{l.estimatedMinutes} min</div>
-                    </div>
-                    <span className="text-muted">&rarr;</span>
-                  </Link>
-                ))}
+        <section className="mt-12">
+          <ProgressChart lessons={lessons} />
+        </section>
+
+        <section className="mt-12 grid gap-4 sm:grid-cols-3">
+          <HowItWorks step="1" title="Pick a lesson" body="Each is 8–18 minutes. Read the concept, see the rubric, plan your prompt." />
+          <HowItWorks step="2" title="Write your prompt" body="Use the editor. Try it without grading to iterate cheap. Hints unlock progressively." />
+          <HowItWorks step="3" title="Get graded live" body="One LLM runs your prompt. Another grades it. 0–100 with per-criterion feedback." />
+        </section>
+
+        <section className="mt-12">
+          <div className="mb-4 flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold tracking-tight">Curriculum</h2>
+            <span className="text-xs text-[color:var(--mute)]">{lessons.length} lessons · ~{totalMin} min</span>
+          </div>
+          {[1, 2, 3, 4].map((lvl) => {
+            const items = byLevel.get(lvl) ?? [];
+            if (!items.length) return null;
+            const chip = ["chip-beginner", "chip-intermediate", "chip-advanced", "chip-expert"][lvl - 1];
+            return (
+              <div key={lvl} className="mb-6">
+                <div className={`chip ${chip} mb-3`}>{LEVEL_NAMES[lvl]}</div>
+                <div className="space-y-2">
+                  {items.map((l) => (
+                    <Link
+                      key={l.id}
+                      href={`/lesson/${l.id}`}
+                      className="card flex items-center justify-between gap-4 px-4 py-3 transition hover:translate-x-0.5"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="grid h-8 w-8 place-items-center rounded-lg bg-[color:var(--panel-2)] text-[color:var(--accent)]">
+                          <LessonIcon id={l.id} />
+                        </span>
+                        <div>
+                          <div className="font-medium leading-tight">{l.title}</div>
+                          <div className="mt-0.5 text-xs text-[color:var(--mute)]">~{l.estimatedMinutes} min</div>
+                        </div>
+                      </div>
+                      <span className="text-[color:var(--mute)]">&rarr;</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </section>
-          );
-        })}
+            );
+          })}
+        </section>
 
-        <footer className="mt-12 border-t border-line pt-6 text-sm text-muted">
+        <footer className="mt-16 border-t border-[color:var(--line)] pt-6 text-sm text-[color:var(--mute)]">
           <p>
-            Set <code className="rounded bg-panel2 px-1.5 py-0.5">OPENAI_API_KEY</code> in
-            <code className="ml-1 rounded bg-panel2 px-1.5 py-0.5">.env</code> to run + grade your prompts.
-            Source on <a className="text-accent underline" href="https://github.com/krish9219/promptlab">GitHub</a>.
+            Set <code className="rounded bg-[color:var(--panel-2)] px-1.5 py-0.5">OPENAI_API_KEY</code> in <code className="rounded bg-[color:var(--panel-2)] px-1.5 py-0.5">.env</code> to run + grade your prompts. Source on <a className="text-[color:var(--accent)] underline" href="https://github.com/krish9219/promptlab">GitHub</a>. MIT licensed.
           </p>
         </footer>
       </div>
     </main>
+  );
+}
+
+function HowItWorks({ step, title, body }: { step: string; title: string; body: string }) {
+  return (
+    <div className="card p-4">
+      <div className="text-xs uppercase tracking-widest text-[color:var(--accent)]">Step {step}</div>
+      <div className="mt-1 font-semibold">{title}</div>
+      <div className="mt-1 text-sm text-[color:var(--text-2)]">{body}</div>
+    </div>
   );
 }

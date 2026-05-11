@@ -2,6 +2,8 @@
 
 > *Learn prompt engineering by doing. Twelve lessons, beginner to expert, with assignments an LLM grades live.*
 
+![demo](docs/demo.gif)
+
 <p align="left">
   <a href="https://github.com/krish9219/promptlab/stargazers"><img src="https://img.shields.io/github/stars/krish9219/promptlab?style=flat-square&color=22d3ee" alt="stars"></a>
   <a href="https://github.com/krish9219/promptlab/blob/main/LICENSE"><img src="https://img.shields.io/github/license/krish9219/promptlab?style=flat-square&color=a3e635" alt="license"></a>
