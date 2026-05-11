@@ -97,11 +97,42 @@ Write the lesson content here. Restart the dev server (or save and let Next.js H
 
 ## Configuration
 
+promptlab works with **any OpenAI-compatible endpoint** — OpenAI, OpenRouter, Groq, Together AI, DeepSeek, Mistral, Ollama, LM Studio, vLLM. Point `OPENAI_BASE_URL` at the provider's `/v1` endpoint.
+
 | Env var | Default | Notes |
 |---|---|---|
-| `OPENAI_API_KEY` | required | Used for both the student model and the judge model |
-| `MODEL_STUDENT` | `gpt-4o-mini` | Cheap model is fine — that's the student trying your prompt |
-| `MODEL_JUDGE` | `gpt-4o-mini` | Use a stronger model here if you can afford it; judging is harder than answering |
+| `OPENAI_API_KEY` | required | Any non-empty string for local providers like Ollama |
+| `OPENAI_BASE_URL` | `https://api.openai.com/v1` | Override to use any compatible provider |
+| `MODEL_STUDENT` | `gpt-4o-mini` | Cheap model is fine — runs every prompt you submit |
+| `MODEL_JUDGE` | `gpt-4o-mini` | Spend a bit more here; judging is harder than answering |
+| `JUDGE_JSON_MODE` | `true` | Set to `false` for providers that don't support `response_format=json_object` |
+
+### Provider examples
+
+```bash
+# OpenRouter — one key, hundreds of models
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+MODEL_STUDENT=anthropic/claude-haiku-4-5
+
+# Groq — very fast inference
+OPENAI_BASE_URL=https://api.groq.com/openai/v1
+MODEL_STUDENT=llama-3.3-70b-versatile
+
+# DeepSeek — cheap, capable
+OPENAI_BASE_URL=https://api.deepseek.com/v1
+MODEL_STUDENT=deepseek-chat
+
+# Ollama — local, free
+OPENAI_BASE_URL=http://localhost:11434/v1
+OPENAI_API_KEY=ollama
+MODEL_STUDENT=llama3.2
+JUDGE_JSON_MODE=false
+
+# vLLM / LM Studio / any OpenAI-compatible local server
+OPENAI_BASE_URL=http://your-host:8000/v1
+```
+
+See [.env.example](.env.example) for the full list with example model IDs.
 
 ## Cost notes
 
