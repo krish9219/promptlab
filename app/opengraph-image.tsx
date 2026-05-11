@@ -22,16 +22,34 @@ export default function OG() {
           color: "#ededed",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 28, fontWeight: 600 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 28, fontWeight: 700 }}>
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: 999,
+                background: "#8b5cf6",
+              }}
+            />
+            <span>promptlab</span>
+          </div>
           <div
             style={{
-              width: 12,
-              height: 12,
+              display: "flex",
+              alignItems: "center",
+              fontSize: 13,
+              letterSpacing: 4,
+              textTransform: "uppercase",
+              color: "#a3a3a3",
+              border: "1px solid #262626",
               borderRadius: 999,
-              background: "#8b5cf6",
+              padding: "6px 14px",
+              background: "#141414",
             }}
-          />
-          <span>promptlab</span>
+          >
+            from Aravind Labs
+          </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div
@@ -70,7 +88,7 @@ export default function OG() {
           }}
         >
           <span>github.com/krish9219/promptlab</span>
-          <span>★ Open-source</span>
+          <span>★ MIT · Aravind Labs</span>
         </div>
       </div>
     ),

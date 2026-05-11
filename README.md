@@ -1,6 +1,8 @@
 # promptlab
 
 > *Learn prompt engineering by doing. Twelve lessons, beginner to expert, with assignments an LLM grades live.*
+>
+> **From Aravind Labs**
 
 ![demo](docs/demo.gif)
 

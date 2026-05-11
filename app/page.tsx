@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getMetaList, LEVEL_NAMES, type LessonMeta } from "@/lib/lessons";
 import { ProgressChart } from "@/components/ProgressChart";
 import { LessonIcon } from "@/components/LessonIcon";
+import { Brand } from "@/components/Brand";
 
 export default function Home() {
   const lessons = getMetaList();
@@ -17,7 +18,8 @@ export default function Home() {
     <main className="h-screen overflow-auto">
       <div className="mx-auto max-w-4xl px-5 py-10 sm:px-8 sm:py-16">
         <section className="relative">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--panel-2)] px-3 py-1 text-xs text-[color:var(--mute)]">
+          <Brand variant="hero" />
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--panel-2)] px-3 py-1 text-xs text-[color:var(--mute)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--good)] animate-pulse-soft" />
             <span>Live LLM grading · 12 lessons · ~{totalMin} min</span>
           </div>
@@ -88,9 +90,10 @@ export default function Home() {
           })}
         </section>
 
-        <footer className="mt-16 border-t border-[color:var(--line)] pt-6 text-sm text-[color:var(--mute)]">
-          <p>
-            Set <code className="rounded bg-[color:var(--panel-2)] px-1.5 py-0.5">OPENAI_API_KEY</code> in <code className="rounded bg-[color:var(--panel-2)] px-1.5 py-0.5">.env</code> to run + grade your prompts. Source on <a className="text-[color:var(--accent)] underline" href="https://github.com/krish9219/promptlab">GitHub</a>. MIT licensed.
+        <footer className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-[color:var(--line)] pt-6 text-sm text-[color:var(--mute)]">
+          <Brand variant="footer" />
+          <p className="text-xs">
+            Set <code className="rounded bg-[color:var(--panel-2)] px-1.5 py-0.5">OPENAI_API_KEY</code> in <code className="rounded bg-[color:var(--panel-2)] px-1.5 py-0.5">.env</code> to run + grade. Source on <a className="text-[color:var(--accent)] underline" href="https://github.com/krish9219/promptlab">GitHub</a> · MIT
           </p>
         </footer>
       </div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { LessonIcon } from "./LessonIcon";
+import { Brand } from "./Brand";
 
 interface Item {
   id: string;
@@ -55,9 +56,7 @@ export function Sidebar({ items, activeId }: { items: Item[]; activeId: string }
         <div className="fixed inset-0 z-40 flex md:hidden">
           <div className="w-72 max-w-[80%] overflow-auto border-r border-[color:var(--line)] bg-[color:var(--panel)]">
             <div className="flex items-center justify-between border-b border-[color:var(--line)] px-4 py-4">
-              <Link href="/" onClick={() => setOpen(false)} className="text-lg font-bold tracking-tight">
-                prompt<span className="text-[color:var(--accent)]">lab</span>
-              </Link>
+              <Brand />
               <button onClick={() => setOpen(false)} aria-label="Close" className="text-[color:var(--mute)]">✕</button>
             </div>
             {Tree}
@@ -69,9 +68,7 @@ export function Sidebar({ items, activeId }: { items: Item[]; activeId: string }
       {/* Desktop sidebar */}
       <aside className="hidden w-64 flex-shrink-0 overflow-auto border-r border-[color:var(--line)] bg-[color:var(--panel)] md:block">
         <div className="border-b border-[color:var(--line)] px-4 py-4">
-          <Link href="/" className="text-lg font-bold tracking-tight">
-            prompt<span className="text-[color:var(--accent)]">lab</span>
-          </Link>
+          <Brand />
         </div>
         {Tree}
       </aside>
